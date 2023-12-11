@@ -1,9 +1,12 @@
-import React, { FC, PropsWithChildren, useState } from 'react';
+import React, { FC, PropsWithChildren } from 'react';
 import Link from 'next/link';
 import { Col, Input, Menu, MenuProps, Row } from 'antd';
 import styled from 'styled-components';
 import { UserProfile } from './UserProfile';
 import { LoginForm } from './LoginForm';
+import { useSelector } from 'react-redux';
+import { UserProps } from '../reducer/user';
+import { ModelProps } from '../reducer';
 
 const SearchInput = styled(Input.Search)`
   vertical-align: middle;
@@ -41,7 +44,7 @@ const items: MenuProps['items'] = [
 ];
 
 export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const isLoggedIn = useSelector<ModelProps>((state) => state.user.isLoggedIn);
 
   return (
     <div>
@@ -57,11 +60,7 @@ export const AppLayout: FC<PropsWithChildren> = ({ children }) => {
         <Col
           xs={24}
           md={8}>
-          {isLoggedIn ? (
-            <UserProfile setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginForm setIsLoggedIn={setIsLoggedIn} />
-          )}
+          {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </Col>
         <Col
           xs={24}

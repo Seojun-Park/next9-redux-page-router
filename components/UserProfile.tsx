@@ -1,11 +1,15 @@
-import React, { Dispatch, FC, SetStateAction } from 'react';
+import React, { FC } from 'react';
 import { Avatar, Button, Card } from 'antd';
+import { useDispatch } from 'react-redux';
+import { logoutAction } from '../reducer/user';
 
-interface UserProfileProps {
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-}
+export const UserProfile: FC = () => {
+  const dispatch = useDispatch();
 
-export const UserProfile: FC<UserProfileProps> = ({ setIsLoggedIn }) => {
+  const onLogout = () => {
+    dispatch(logoutAction());
+  };
+
   return (
     <Card
       actions={[
@@ -26,9 +30,13 @@ export const UserProfile: FC<UserProfileProps> = ({ setIsLoggedIn }) => {
         avatar={<Avatar>U</Avatar>}
         title='User'
       />
-      <Button style={{
-        margin: '12px'
-      }} onClick={() => setIsLoggedIn(false)}>Log out</Button>
+      <Button
+        style={{
+          margin: '12px',
+        }}
+        onClick={onLogout}>
+        Log out
+      </Button>
     </Card>
   );
 };

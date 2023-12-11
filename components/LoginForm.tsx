@@ -1,22 +1,26 @@
-import React, { Dispatch, FC, SetStateAction, useCallback } from 'react';
+import React, { FC } from 'react';
 import { Button, Form, Input } from 'antd';
 import Link from 'next/link';
-
-interface LoginFormProps {
-  setIsLoggedIn: Dispatch<SetStateAction<boolean>>;
-}
+import { useDispatch } from 'react-redux';
+import { loginAction } from '../reducer/user';
 
 type FieldType = {
   userId?: string;
   password?: string;
 };
 
-export const LoginForm: FC<LoginFormProps> = ({ setIsLoggedIn }) => {
+export const LoginForm: FC = () => {
   const [form] = Form.useForm();
+  const dispatch = useDispatch();
 
   const onSubmit = () => {
     const { userId, password }: FieldType = form.getFieldsValue();
-    setIsLoggedIn(true);
+    dispatch(
+      loginAction({
+        userId,
+        password,
+      })
+    );
   };
 
   return (
