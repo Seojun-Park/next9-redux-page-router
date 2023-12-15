@@ -5,5 +5,6 @@ export * from './NicknameEditForm';
 export * from './FollowList';
 export * from './PostForm';
 export * from './PostCard';
+export * from './PostImages';
 
 export default null;

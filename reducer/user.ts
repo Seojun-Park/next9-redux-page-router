@@ -3,8 +3,10 @@ import { AnyAction } from 'redux';
 export interface UserProps {
   isLoggedIn: boolean;
   data: {
+    id: number;
     userId: string;
     password: string;
+    nickname: string;
   } | null;
   signUpData: Record<any, any>;
   loginData: Record<any, any>;
